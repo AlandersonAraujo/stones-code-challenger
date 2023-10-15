@@ -1,0 +1,1 @@
+INSERT INTO credit_card (number, cv, holder_name, exp_date) VALUES ('1234123412341234', '789', 'Luke Skywalker', '12/24');
