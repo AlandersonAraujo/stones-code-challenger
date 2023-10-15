@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS product (
     price INT NOT NULL,
     zipcode VARCHAR(255) NOT NULL,
     seller_id INT,
-    thumbnailHd VARCHAR(255),
+    thumbnail_hd VARCHAR(255),
     date DATE,
     FOREIGN KEY (seller_id) REFERENCES seller(id)
 );

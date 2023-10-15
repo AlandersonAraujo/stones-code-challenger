@@ -20,8 +20,10 @@ public class Product {
     private String title;
     private Integer price;
     private String zipcode;
-    @ManyToMany
+    @ManyToOne
     private Seller seller;
+
+    @Column(name = "thumbnail_hd")
     private String thumbnailHd;
     private Date date;
 }

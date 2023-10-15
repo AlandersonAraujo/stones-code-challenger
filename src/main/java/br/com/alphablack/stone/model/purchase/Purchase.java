@@ -1,4 +1,4 @@
-package br.com.alphablack.stone.model.transaction;
+package br.com.alphablack.stone.model.purchase;
 
 import br.com.alphablack.stone.model.client.Client;
 import br.com.alphablack.stone.model.creditcard.CreditCard;
@@ -13,14 +13,14 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Transaction {
+public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Client client;
-    private Integer value;
-    private Date date;
+    private Integer purchaseValue;
+    private Date purchaseDate;
     @ManyToOne
     private CreditCard creditCard;
 
