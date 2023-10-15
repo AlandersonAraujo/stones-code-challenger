@@ -1,6 +1,7 @@
 package br.com.alphablack.stone.model.transaction;
 
 import br.com.alphablack.stone.model.client.Client;
+import br.com.alphablack.stone.model.creditcard.CreditCard;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,5 +21,7 @@ public class Transaction {
     private Client client;
     private Integer value;
     private Date date;
+    @ManyToOne
+    private CreditCard creditCard;
 
 }
