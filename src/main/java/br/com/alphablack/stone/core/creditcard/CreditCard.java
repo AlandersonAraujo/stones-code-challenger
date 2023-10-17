@@ -1,4 +1,4 @@
-package br.com.alphablack.stone.model.client;
+package br.com.alphablack.stone.core.creditcard;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,9 +12,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Client {
+public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String number;
+    private String cv;
+    private String holderName;
+    private String expDate;
 }

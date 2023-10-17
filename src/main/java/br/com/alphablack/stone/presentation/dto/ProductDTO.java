@@ -1,10 +1,11 @@
-package br.com.alphablack.stone.controller.dto.product;
+package br.com.alphablack.stone.presentation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDTO {
+public class ProductDTO implements Serializable {
     private String title;
     private int price;
     private String zipcode;

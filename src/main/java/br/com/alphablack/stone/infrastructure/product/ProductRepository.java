@@ -1,6 +1,6 @@
-package br.com.alphablack.stone.repository.product;
+package br.com.alphablack.stone.infrastructure.product;
 
-import br.com.alphablack.stone.model.product.Product;
+import br.com.alphablack.stone.core.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {

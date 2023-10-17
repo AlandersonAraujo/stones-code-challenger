@@ -1,6 +1,6 @@
-package br.com.alphablack.stone.model.product;
+package br.com.alphablack.stone.core.product;
 
-import br.com.alphablack.stone.model.seller.Seller;
+import br.com.alphablack.stone.core.seller.Seller;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

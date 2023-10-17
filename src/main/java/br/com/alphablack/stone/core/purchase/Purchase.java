@@ -1,7 +1,7 @@
-package br.com.alphablack.stone.model.purchase;
+package br.com.alphablack.stone.core.purchase;
 
-import br.com.alphablack.stone.model.client.Client;
-import br.com.alphablack.stone.model.creditcard.CreditCard;
+import br.com.alphablack.stone.core.client.Client;
+import br.com.alphablack.stone.core.creditcard.CreditCard;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

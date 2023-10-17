@@ -1,7 +1,7 @@
-package br.com.alphablack.stone.service.product;
+package br.com.alphablack.stone.application.product;
 
-import br.com.alphablack.stone.model.product.Product;
-import br.com.alphablack.stone.repository.product.ProductRepository;
+import br.com.alphablack.stone.core.product.Product;
+import br.com.alphablack.stone.infrastructure.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

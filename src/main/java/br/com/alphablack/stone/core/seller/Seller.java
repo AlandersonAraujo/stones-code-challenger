@@ -1,4 +1,4 @@
-package br.com.alphablack.stone.model.seller;
+package br.com.alphablack.stone.core.seller;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

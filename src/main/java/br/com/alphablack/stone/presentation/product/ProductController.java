@@ -1,8 +1,9 @@
-package br.com.alphablack.stone.controller.product;
+package br.com.alphablack.stone.presentation.product;
 
-import br.com.alphablack.stone.controller.dto.product.ProductDTO;
-import br.com.alphablack.stone.model.product.Product;
-import br.com.alphablack.stone.service.product.ProductService;
+import br.com.alphablack.stone.adapters.cache.CacheGateway;
+import br.com.alphablack.stone.presentation.dto.ProductDTO;
+import br.com.alphablack.stone.core.product.Product;
+import br.com.alphablack.stone.application.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
@@ -18,19 +19,30 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     private final ProductService productService;
+    private final CacheGateway cacheGateway;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CacheGateway cacheGateway) {
         this.productService = productService;
+        this.cacheGateway = cacheGateway;
     }
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<ProductDTO> cachedProducts = (List<ProductDTO>) cacheGateway.get("allProducts");
+
+        if (cachedProducts != null) {
+            System.out.println("Tem cache");
+            return ResponseEntity.ok(cachedProducts);
+        }
+
         List<Product> productList = productService.getAllProducts();
 
         List<ProductDTO> productDTOList = productList.stream()
                 .map(this::convertToProductDTO)
                 .collect(Collectors.toList());
+
+        cacheGateway.put("allProducts", productDTOList, 60);
 
         return ResponseEntity.ok(productDTOList);
     }
