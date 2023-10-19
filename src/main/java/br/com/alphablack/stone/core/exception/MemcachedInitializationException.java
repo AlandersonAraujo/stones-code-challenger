@@ -1,4 +1,4 @@
-package br.com.alphablack.stone.exception;
+package br.com.alphablack.stone.core.exception;
 
 public class MemcachedInitializationException extends RuntimeException {
 

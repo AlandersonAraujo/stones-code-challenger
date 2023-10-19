@@ -1,6 +1,7 @@
 package br.com.alphablack.stone.presentation.purchase;
 
 import br.com.alphablack.stone.adapters.cache.CacheGateway;
+import br.com.alphablack.stone.application.cache.CacheService;
 import br.com.alphablack.stone.application.client.ClientService;
 import br.com.alphablack.stone.application.creditcard.CreditCardService;
 import br.com.alphablack.stone.application.purchase.PurchaseService;
@@ -25,21 +26,21 @@ import java.util.stream.Collectors;
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
-    private final CacheGateway cacheGateway;
+    private final CacheService cacheService;
     private final ClientService clientService;
     private final CreditCardService creditCardService;
 
     @Autowired
-    public PurchaseController(PurchaseService purchaseService, CacheGateway cacheGateway, ClientService clientService, CreditCardService creditCardService) {
+    public PurchaseController(PurchaseService purchaseService, CacheService cacheService, ClientService clientService, CreditCardService creditCardService) {
         this.purchaseService = purchaseService;
-        this.cacheGateway = cacheGateway;
+        this.cacheService = cacheService;
         this.clientService = clientService;
         this.creditCardService = creditCardService;
     }
 
     @RequestMapping(value = "/history", method = RequestMethod.GET)
     public ResponseEntity<List<PurchaseDTO>> getAllPurchases() {
-        List<PurchaseDTO> cachedPurchases = (List<PurchaseDTO>) cacheGateway.get("allPurchases");
+        List<PurchaseDTO> cachedPurchases = (List<PurchaseDTO>) cacheService.get("allPurchases");
 
         if (cachedPurchases != null) {
             return ResponseEntity.ok(cachedPurchases);
@@ -51,14 +52,14 @@ public class PurchaseController {
                 .map(this::convertToPurchaseDTO)
                 .collect(Collectors.toList());
 
-        cacheGateway.put("allPurchases", purchaseDTOList, 60);
+        cacheService.put("allPurchases", purchaseDTOList, 60);
 
         return ResponseEntity.ok(purchaseDTOList);
     }
 
     @RequestMapping(value = "/history/{clientId}", method = RequestMethod.GET)
     public ResponseEntity<List<PurchaseDTO>> findAllById(@PathVariable(value = "clientId") String clientId) {
-        List<PurchaseDTO> cachedPurchases = (List<PurchaseDTO>) cacheGateway.get(clientId);
+        List<PurchaseDTO> cachedPurchases = (List<PurchaseDTO>) cacheService.get(clientId);
 
         if (cachedPurchases != null) {
             return ResponseEntity.ok(cachedPurchases);
@@ -70,7 +71,7 @@ public class PurchaseController {
                 .map(this::convertToPurchaseDTO)
                 .collect(Collectors.toList());
 
-        cacheGateway.put(clientId, purchaseDTOList, 60);
+        cacheService.put(clientId, purchaseDTOList, 60);
 
         return ResponseEntity.ok(purchaseDTOList);
     }

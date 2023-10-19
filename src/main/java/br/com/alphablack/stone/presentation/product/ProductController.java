@@ -1,6 +1,6 @@
 package br.com.alphablack.stone.presentation.product;
 
-import br.com.alphablack.stone.adapters.cache.CacheGateway;
+import br.com.alphablack.stone.application.cache.CacheService;
 import br.com.alphablack.stone.application.seller.SellerService;
 import br.com.alphablack.stone.core.seller.Seller;
 import br.com.alphablack.stone.presentation.dto.ProductDTO;
@@ -26,18 +26,18 @@ public class ProductController {
 
     private final ProductService productService;
     private final SellerService sellerService;
-    private final CacheGateway cacheGateway;
+    private final CacheService cacheService;
 
     @Autowired
-    public ProductController(ProductService productService, SellerService sellerService, CacheGateway cacheGateway) {
+    public ProductController(ProductService productService, SellerService sellerService, CacheService cacheService) {
         this.productService = productService;
         this.sellerService = sellerService;
-        this.cacheGateway = cacheGateway;
+        this.cacheService = cacheService;
     }
 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<ProductDTO> cachedProducts = (List<ProductDTO>) cacheGateway.get("allProducts");
+        List<ProductDTO> cachedProducts = (List<ProductDTO>) cacheService.get("allProducts");
 
         if (cachedProducts != null) {
             return ResponseEntity.ok(cachedProducts);
@@ -49,7 +49,7 @@ public class ProductController {
                 .map(this::convertToProductDTO)
                 .collect(Collectors.toList());
 
-        cacheGateway.put("allProducts", productDTOList, 60);
+        cacheService.put("allProducts", productDTOList, 60);
 
         return ResponseEntity.ok(productDTOList);
     }

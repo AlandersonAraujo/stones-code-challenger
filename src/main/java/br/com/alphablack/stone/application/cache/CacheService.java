@@ -3,7 +3,9 @@ package br.com.alphablack.stone.application.cache;
 import br.com.alphablack.stone.adapters.cache.CacheGateway;
 import br.com.alphablack.stone.core.cache.CacheUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CacheService implements CacheUseCase {
 
     private final CacheGateway cacheGateway;
